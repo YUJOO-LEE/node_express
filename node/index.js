@@ -13,6 +13,10 @@ __dirname : 현재 경로
 */
 app.use(express.static(path.join(__dirname, '../react/build')));
 
+// 클라이언트에서 보내는 데이터를 받도록 설정 body-parser
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 app.listen(port, ()=>{
   mongoose.connect('mongodb+srv://yujoo:zk3hj4XjoQQijwOD@cluster0.f8z7pj4.mongodb.net/?retryWrites=true&w=majority')
   .then(()=>
@@ -30,3 +34,9 @@ app.get('/', (request, response)=>{
 app.get('*', (request, response)=>{
   response.sendFile(path.join(__dirname, '../react/build/index.html'));
 });
+
+//react로부터 받은 요청 처리
+app.post('/api/send', (request, response)=>{
+  console.log(request.body);
+  response.json({success: true, result: request.body});
+})
