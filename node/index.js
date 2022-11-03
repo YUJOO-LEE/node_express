@@ -3,6 +3,8 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const { Post } = require('./model/postSchema.js')
+
 const app = express();
 const port = 8888;
 /*
@@ -36,7 +38,18 @@ app.get('*', (request, response)=>{
 });
 
 //react로부터 받은 요청 처리
-app.post('/api/send', (request, response)=>{
-  console.log(request.body);
-  response.json({success: true, result: request.body});
+app.post('/api/create', (request, response)=>{
+  const PostModel = new Post({
+    title: request.body.title,
+    content: request.body.content
+  })
+
+  PostModel.save()
+    .then(()=>{
+      response.json({success: true, result: request.body});
+    })
+    .catch(error=>{
+      console.log(error);
+      response.json({success: false})
+    });
 })
