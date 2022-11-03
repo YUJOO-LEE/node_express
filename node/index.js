@@ -1,13 +1,8 @@
-// npm init -y
-// npm i express --save
+// mongodb+srv://yujoo:zk3hj4XjoQQijwOD@cluster0.f8z7pj4.mongodb.net/?retryWrites=true&w=majority
 
-// 서버구동
-// node index.js
-// 변경점 생길때마다 재구동 필요
-
-//const { request, path } = require('express');
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
 const app = express();
 const port = 8888;
 /*
@@ -19,7 +14,12 @@ __dirname : 현재 경로
 app.use(express.static(path.join(__dirname, '../react/build')));
 
 app.listen(port, ()=>{
-  console.log(`Server app listening on port ${port}`);
+  mongoose.connect('mongodb+srv://yujoo:zk3hj4XjoQQijwOD@cluster0.f8z7pj4.mongodb.net/?retryWrites=true&w=majority')
+  .then(()=>
+    console.log(`Server app listening on port ${port} with MongoDB`)
+  ).catch(
+    error=>console.error(error)
+  );
 });
 
 app.get('/', (request, response)=>{
