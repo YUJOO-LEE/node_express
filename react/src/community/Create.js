@@ -13,7 +13,7 @@ function Create() {
     if (!Title.trim() || !Content.trim()) return alert('제목과 본문을 모두 입력하세요.');
 		const item = {title: Title, content: Content};
 
-		axios.post('/api/create', item)
+		axios.post('/api/community/create', item)
 		.then(response=>{
       if (response.data.success){
         alert('글 저장이 완료되었습니다.');
