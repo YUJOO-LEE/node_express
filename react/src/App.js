@@ -1,51 +1,20 @@
-import axios from 'axios';
-import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Header from './common/Header';
+import Main from './common/Main';
+import List from './community/List';
+import Create from './community/Create';
 
 function App() {
-
-	const [ Title, setTitle ] = useState('');
-	const [ Content, setContent ] = useState('');
-
-	const handleCreate = ()=>{
-		const item = {title: Title, content: Content};
-
-		axios.post('/api/create', item)
-		.then(response=>{
-			console.log(response);
-		})
-		.catch(err=>{
-			console.log(err);
-		})
-	}
-
-
 	return (
-		<section>
-			<ul>
-				<li>
-					<label htmlFor="title">Title</label>
-					<input type="text"
-						name="title" id="title"
-						value={Title}
-						onChange={e=>setTitle(e.target.value)}
-					/>
-				</li>
-				<li>
-					<label htmlFor="content">Content</label>
-					<textarea
-						name="content" id="content"
-						cols="30" rows="3"
-						value={Content}
-						onChange={e=>setContent(e.target.value)}
-					></textarea>
-				</li>
-				<li>
-					<button
-						onClick={handleCreate}
-					>SEND</button>
-				</li>
-			</ul>
-		</section>
+		<>
+			<Header />
+
+			<Routes>
+				<Route path='/' element={<Main />} />
+				<Route path='/list' element={<List />} />
+				<Route path='/create' element={<Create />} />
+			</Routes>
+		</>
 	);
 }
 

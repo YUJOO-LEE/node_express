@@ -10,7 +10,7 @@
 /react/coverage
 
 # production
-/react/build
+# /react/build
 
 # misc
 .DS_Store
