@@ -1,18 +1,26 @@
 import axios from 'axios';
 import { useState } from 'react';
 import Layout from '../common/Layout';
+import { useNavigate } from 'react-router-dom';
 
 function Create() {
 
+  const navigate = useNavigate();
   const [ Title, setTitle ] = useState('');
 	const [ Content, setContent ] = useState('');
 
 	const handleCreate = ()=>{
+    if (!Title.trim() || !Content.trim()) return alert('제목과 본문을 모두 입력하세요.');
 		const item = {title: Title, content: Content};
 
 		axios.post('/api/create', item)
 		.then(response=>{
-			console.log(response);
+      if (response.data.success){
+        alert('글 저장이 완료되었습니다.');
+        navigate('/list');
+      } else {
+        alert('글 저장이 실패했습니다.');
+      }
 		})
 		.catch(err=>{
 			console.log(err);

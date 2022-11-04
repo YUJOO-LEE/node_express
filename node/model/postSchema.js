@@ -6,8 +6,10 @@ const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
   title: String,
-  content: String
-});
+  content: String,
+  communityNum: Number,
+}, { collection: 'Posts'});
 
-const Post = mongoose.model('test2', postSchema);
+//모델은 스키마를 통해서 만드는 인스턴스
+const Post = mongoose.model('Posts', postSchema);
 module.exports = { Post };
