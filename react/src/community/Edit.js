@@ -60,7 +60,7 @@ function Edit() {
   useEffect(()=>{
     setTitle(Detail.title);
     setContent(Detail.content);
-    setLoaded(true);
+    Detail.title && setLoaded(true);
   }, [Detail])
 
   return (
