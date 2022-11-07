@@ -70,4 +70,21 @@ router.post('/detail', (request, response)=>{
     })
 })
 
+router.post('/edit', (request, response)=>{
+  const temp = {
+    title: request.body.title,
+    content: request.body.content
+  }
+
+  Post.updateOne({communityNum: request.body.num}, {$set: temp})
+    .exec()
+    .then(()=>{
+      response.json({success: true});
+    })
+    .catch(error=>{
+      console.error(error);
+      response.json({success: false});
+    })
+})
+
 module.exports = router;
