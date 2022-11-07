@@ -44,6 +44,12 @@ function Edit() {
   };
 
   useEffect(()=>{
+    setTitle(Detail.title);
+    setContent(Detail.content);
+    Detail.title && setLoaded(true);
+  }, [Detail])
+
+  useEffect(()=>{
     const item = {num: params.num};
     axios.post('/api/community/detail', item)
       .then(respons=>{
@@ -56,13 +62,7 @@ function Edit() {
         console.error(error);
       })
   }, [])
-
-  useEffect(()=>{
-    setTitle(Detail.title);
-    setContent(Detail.content);
-    Detail.title && setLoaded(true);
-  }, [Detail])
-
+  
   return (
     <Layout name='Edit'>
       {Loaded ?
