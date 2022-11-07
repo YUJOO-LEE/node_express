@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
 import Styled from 'styled-components';
@@ -21,28 +21,49 @@ const BtnSet = Styled.div`
 
 function Detail() {
   const params = useParams();
+  const navigate = useNavigate();
   const [ Detail, setDetail ] = useState(null);
+  const [ Loaded, setLoaded ] = useState(false);
   
   const item = {
     num: params.num
+  }
+
+  const handleDelete = ()=>{
+    if (!window.confirm('정말 삭제하시겠습니까?')) return;
+
+    axios.post('/api/community/delete', item)
+      .then(response=>{
+        if (response.data.success) {
+          alert('게시글이 삭제되었습니다.');
+          navigate('/list');
+        } else {
+          alert('게시글 삭제에 실패했습니다.');
+        }
+      })
+      .catch(error=>{
+        console.error(error);
+      })
   }
 
   useEffect(()=>{
     axios.post('/api/community/detail', item)
       .then(response=>{
         if (response.data.success) {
-          console.log(response.data.detail);
           setDetail(response.data.detail);
         }
       })
       .catch(error=>{
         console.log(error);
       })
+      .finally(()=>{
+        setLoaded(true);
+      })
   }, []);
 
   return (
     <Layout name='Detail'>
-      {Detail &&
+      {Loaded ? Detail &&
         <>
           <DetailWrap>
             <h2>{Detail.title}</h2>
@@ -51,9 +72,10 @@ function Detail() {
 
           <BtnSet>
             <button><Link to={`/edit/${Detail.communityNum}`}>EDIT</Link></button>
-            <button><Link to={`/delete/${Detail.communityNum}`}>DELETE</Link></button>
+            <button onClick={handleDelete}>DELETE</button>
           </BtnSet>
         </>
+      : <p>Loading...</p>
       }
     </Layout>
   )

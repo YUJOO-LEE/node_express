@@ -43,6 +43,9 @@ const MainWrap = Styled.main`
         border: none;
 
         a{
+          width: 100%;
+          height: 100%;
+          display: block;
           color: #fff;
         }
       }
