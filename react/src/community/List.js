@@ -16,6 +16,8 @@ function List() {
 
   const [ List, setList ] = useState([]);
 
+  console.log(List);
+
   useEffect(()=>{
     axios.post('/api/community/read')
       .then(response=>{
@@ -39,6 +41,9 @@ function List() {
                 {post.title}
               </Link>
             </h2>
+            <span>
+              {post.writer.displayName}
+            </span>
           </Item>
         )
       })}

@@ -11,8 +11,6 @@ function Create() {
   const [ Title, setTitle ] = useState('');
 	const [ Content, setContent ] = useState('');
 
-  console.log(User.uid);
-
 	const handleCreate = ()=>{
     if (!Title.trim() || !Content.trim()) return alert('제목과 본문을 모두 입력하세요.');
 		const item = {

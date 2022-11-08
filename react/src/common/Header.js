@@ -1,5 +1,4 @@
 import Styled from 'styled-components';
-import { useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../redux/userSlice';
