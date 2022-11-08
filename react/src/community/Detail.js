@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
 import Styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 const DetailWrap = Styled.div`
   width: 100%;
@@ -24,6 +25,7 @@ function Detail() {
   const navigate = useNavigate();
   const [ Detail, setDetail ] = useState(null);
   const [ Loaded, setLoaded ] = useState(false);
+  const User = useSelector(store=>store.user);
   
   const item = {
     num: params.num
@@ -70,10 +72,12 @@ function Detail() {
             <p>{Detail.content}</p>
           </DetailWrap>
 
-          <BtnSet>
-            <button><Link to={`/edit/${Detail.communityNum}`}>EDIT</Link></button>
-            <button onClick={handleDelete}>DELETE</button>
-          </BtnSet>
+          {User.accessToken &&
+            <BtnSet>
+              <button><Link to={`/edit/${Detail.communityNum}`}>EDIT</Link></button>
+              <button onClick={handleDelete}>DELETE</button>
+            </BtnSet>
+          }
         </>
       : <p>Loading...</p>
       }

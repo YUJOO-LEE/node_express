@@ -20,18 +20,13 @@ function App() {
 	useEffect(()=>{
 		// firebase로부터 현재 auth 상태 변화를 감지해서 파라미터로 해당 상태값 전달
 		firebase.auth().onAuthStateChanged((userInfo)=>{
+			console.log(userInfo);
 			if (!userInfo) {
-				dispatch(logoutUser);
+				dispatch(logoutUser());
 			} else {
-				dispatch(loginUser(userInfo.multiFactor));
+				dispatch(loginUser(userInfo.multiFactor.user));
 			}
 		});
-	}, []);
-
-	useEffect(()=>{
-		// firebase로부터 현재 auth 상태 변화를 감지해서 파라미터로 해당 상태값 전달
-		//firebase.auth().signOut();
-
 	}, []);
 
 	return (
