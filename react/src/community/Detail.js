@@ -69,10 +69,11 @@ function Detail() {
         <>
           <DetailWrap>
             <h2>{Detail.title}</h2>
+            <p>{Detail.writer.displayName}</p>
             <p>{Detail.content}</p>
           </DetailWrap>
 
-          {User.accessToken &&
+          {User.uid === Detail.writer.uid &&
             <BtnSet>
               <button><Link to={`/edit/${Detail.communityNum}`}>EDIT</Link></button>
               <button onClick={handleDelete}>DELETE</button>
