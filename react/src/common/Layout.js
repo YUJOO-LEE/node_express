@@ -24,7 +24,7 @@ const MainWrap = Styled.main`
         margin-bottom: 5px;
       }
 
-      input[type='text'],textarea{
+      input[type='text'],input[type='password'],input[type='email'],textarea{
         display: block;
         width: 50%;
         min-width: 300px;
