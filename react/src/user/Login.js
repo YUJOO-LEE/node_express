@@ -19,22 +19,30 @@ function Login() {
   const [ Pwd, setPwd ] = useState('');
   const [ Err, setErr ] = useState('');
 
+  const handleLogin = ()=>{
+
+  }
+
   return (
     <Layout name='Login'>
-      <ul>
-        <li>
-          <input type='email' value={Email} 
-            placeholder='이메일 주소를 입력하세요.' 
-            onChange={e=>setEmail(e.target.value)}
-          />
-        </li>
-        <li>
-          <input type='password' value={Pwd} 
-            placeholder='비밀번호를 입력하세요.' 
-            onChange={e=>setPwd(e.target.value)}
-          />
-        </li>
-      </ul>
+      <form onSubmit={handleLogin}>
+        <ul>
+          <li>
+            <input type='email' value={Email} 
+              placeholder='이메일 주소를 입력하세요.' 
+              onChange={e=>setEmail(e.target.value)}
+              autoComplete='email'
+            />
+          </li>
+          <li>
+            <input type='password' value={Pwd} 
+              placeholder='비밀번호를 입력하세요.' 
+              onChange={e=>setPwd(e.target.value)}
+              autoComplete='current-password'
+            />
+          </li>
+        </ul>
+      </form>
       <BtnSet>
         <button>Login</button>
       </BtnSet>

@@ -41,32 +41,37 @@ function Join() {
 
   return (
     <Layout name='Join'>
-      <ul>
-        <li>
-          <input type='email' value={Email} 
-            placeholder='이메일 주소를 입력하세요' 
-            onChange={e=> setEmail(e.target.value)}
-          />
-        </li>
-        <li>
-          <input type='password' value={Pwd1} 
-            placeholder='비밀번호를 입력하세요' 
-            onChange={e=> setPwd1(e.target.value)}
-          />
-        </li>
-        <li>
-            <input type='password' value={Pwd2} 
-            placeholder='비밀번호를 재입력하세요' 
-            onChange={e=> setPwd2(e.target.value)}
-          />
-        </li>
-        <li>
-          <input type='text' value={Name} 
-            placeholder='이름을 입력하세요' 
-            onChange={e=> setName(e.target.value)}
-          />
-        </li>
-      </ul>
+      <form onSubmit={handleJoin}>
+        <ul>
+          <li>
+            <input type='email' value={Email} 
+              placeholder='이메일 주소를 입력하세요' 
+              onChange={e=> setEmail(e.target.value)}
+              autoComplete='email'
+            />
+          </li>
+          <li>
+            <input type='password' value={Pwd1} 
+              placeholder='비밀번호를 입력하세요' 
+              onChange={e=> setPwd1(e.target.value)}
+              autoComplete='new-password'
+            />
+          </li>
+          <li>
+              <input type='password' value={Pwd2} 
+              placeholder='비밀번호를 재입력하세요' 
+              onChange={e=> setPwd2(e.target.value)}
+              autoComplete='new-password'
+            />
+          </li>
+          <li>
+            <input type='text' value={Name} 
+              placeholder='이름을 입력하세요' 
+              onChange={e=> setName(e.target.value)}
+            />
+          </li>
+        </ul>
+      </form>
       <BtnSet>
         <button onClick={()=>navigate(-1)}>Cancel</button>
         <button onClick={handleJoin}>Join</button>
