@@ -28,7 +28,10 @@ function Login() {
       await firebase.auth().signInWithEmailAndPassword(Email, Pwd);
       navigate('/');
     } catch (err) {
-      if (err.code === 'auth/user-not-found') {
+      console.log(err.code);
+      if (err.code === 'auth/invalid-email') {
+        setErr('이메일 형식을 확인하세요.')
+      } else if (err.code === 'auth/user-not-found') {
         setErr('존재하지 않는 이메일 입니다.')
       } else if (err.code === 'auth/wrong-password') {
         setErr('비밀번호 정보가 일치하지 않습니다.')
@@ -57,9 +60,11 @@ function Login() {
               autoComplete='current-password'
             />
           </li>
-          <li>
-            {Err}
-          </li>
+          {Err && 
+            <li className='errMsg'>
+              {Err}
+            </li>
+          }
         </ul>
       </form>
       <BtnSet>
