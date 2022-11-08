@@ -50,6 +50,7 @@ router.post('/create', (request, response)=>{
 //post 불러오기
 router.post('/read', (request, response)=>{
   Post.find()
+    .populate('writer')
     .exec()
     .then(doc=>{
       response.json({success: true, communityList: doc});
@@ -63,6 +64,7 @@ router.post('/read', (request, response)=>{
 //detail 불러오기
 router.post('/detail', (request, response)=>{
   Post.findOne({communityNum: request.body.num})
+    .populate('writer')
     .exec()
     .then(doc=>{
       response.json({success: true, detail: doc});
