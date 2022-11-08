@@ -8,7 +8,10 @@ const postSchema = new mongoose.Schema({
   title: String,
   content: String,
   communityNum: Number,
-  userNum: Number
+  writer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Users'
+  }
 }, { collection: 'Posts'});
 
 //모델은 스키마를 통해서 만드는 인스턴스

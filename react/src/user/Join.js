@@ -43,12 +43,14 @@ function Join() {
     const item = {
       email: createdUser.user.multiFactor.user.email,
       displayName: createdUser.user.multiFactor.user.displayName,
-      uid: createdUser.user.multiFactor.user.uid
+      uid: createdUser.user.multiFactor.user.uid,
     }
+
+    firebase.auth().signOut();
+    dispatch(logoutUser());
 
     axios.post('/api/user/join', item).then(res=>{
       if (res.data.success) {
-        dispatch(logoutUser());
         alert('회원가입에 성공했습니다.');
         navigate('/login');
       } else {

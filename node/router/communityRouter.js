@@ -6,6 +6,7 @@ const { Post } = require('../model/postSchema.js');
 // 카운터 컬렉션에 초기 데이터가 들어갈 첫 document 를 mongoDB 상에서 직접 생성
 // {name: 'counter, communityNum: 1}
 const { Counter } = require('../model/counterSchema.js');
+const { User } = require('../model/userSchema.js');
 
 
 //react로부터 받은 요청 처리
@@ -21,27 +22,28 @@ router.post('/create', (request, response)=>{
     .then(doc=>{
       // 기존 프론트에서 받은 데이터에 communityNum 값 추가
 
-      const PostModel = new Post({
-        title: request.body.title,
-        content: request.body.content,
-        communityNum: doc.communityNum,
-        userNum: request.body.userNum,
-      })
+      const temp = request.body;
+      temp.communityNum = doc.communityNum;
 
-      PostModel.save()
-      .then(()=>{
-        // 갱신 후 counter 의 communityNum 값 업데이트
-        // updateOne( 찾을조건, 변경식 )
-        // $inc = 증가 / $dec = 감소 / $set = 새로운 값으로 변경
-        Counter.updateOne({name: 'counter'}, {$inc: {communityNum: 1}})
-          .then(()=>{
-            response.json({success: true});
-          })
-      })
-      .catch(error=>{
-        console.log(error);
-        response.json({success: false})
-      });
+      User.findOne({uid: temp.uid})
+        .exec()
+        .then(doc=>{
+          temp.writer = doc._id;
+
+          const PostModel = new Post(temp);
+
+          PostModel.save()
+            .then(()=>{
+              Counter.updateOne({name: 'counter'}, {$inc: {communityNum: 1}})
+                .then(()=>{
+                  response.json({success: true});
+                })
+            })
+            .catch(error=>{
+              console.log(error);
+              response.json({success: false})
+            });
+        })
     })
 })
 

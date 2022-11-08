@@ -8,10 +8,10 @@ router.post('/join', (req, res)=>{
   const temp = req.body;
 
   Counter.findOne({name: 'counter'})
+    .exec()
     .then(doc=>{
       temp.userNum = doc.userNum;
 
-      console.log('userNum', temp.userNum, doc.userNum);
       const userData = new User(temp);
 
       userData.save()
