@@ -19,7 +19,23 @@ function Login() {
   const [ Pwd, setPwd ] = useState('');
   const [ Err, setErr ] = useState('');
 
-  const handleLogin = ()=>{
+  const handleLogin = async ()=>{
+    if (!(Email && Pwd)) {
+      return alert('이메일과 비밀번호를 입력하세요.');
+    }
+
+    try{
+      await firebase.auth().signInWithEmailAndPassword(Email, Pwd);
+      navigate('/');
+    } catch (err) {
+      if (err.code === 'auth/user-not-found') {
+        setErr('존재하지 않는 이메일 입니다.')
+      } else if (err.code === 'auth/wrong-password') {
+        setErr('비밀번호 정보가 일치하지 않습니다.')
+      } else {
+        setErr('로그인에 실패했습니다.')
+      }
+    }
 
   }
 
@@ -41,10 +57,14 @@ function Login() {
               autoComplete='current-password'
             />
           </li>
+          <li>
+            {Err}
+          </li>
         </ul>
       </form>
       <BtnSet>
-        <button>Login</button>
+        <button onClick={handleLogin}>Login</button>
+        <button onClick={()=>navigate('/join')}>Join</button>
       </BtnSet>
     </Layout>
   )
