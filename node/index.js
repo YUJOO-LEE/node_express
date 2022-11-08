@@ -15,8 +15,10 @@ app.use(express.static(path.join(__dirname, '../react/build')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-// 커뮤니티 전용 라우터 연결
+// community 라우터
 app.use('/api/community', require('./router/communityRouter.js'))
+// user 라우터
+app.use('/api/user', require('./router/userRouter.js'))
 
 app.listen(port, ()=>{
   mongoose.connect('mongodb+srv://yujoo:zk3hj4XjoQQijwOD@cluster0.f8z7pj4.mongodb.net/?retryWrites=true&w=majority')

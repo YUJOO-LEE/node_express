@@ -2,7 +2,10 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import Layout from '../common/Layout';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../redux/userSlice';
 import firebase from '../firebase';
+import axios from 'axios';
 
 const BtnSet = styled.div`
   margin-top: 20px;
@@ -14,6 +17,7 @@ const BtnSet = styled.div`
 
 function Join() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [ Email, setEmail ] = useState('');
   const [ Pwd1, setPwd1 ] = useState('');
   const [ Pwd2, setPwd2 ] = useState('');
@@ -35,8 +39,22 @@ function Join() {
       displayName: Name
     })
 
-    console.log(createdUser.user);
-    navigate('/login');
+    // firebase로 부터 인증 정보값을 받아 객체에 담기
+    const item = {
+      email: createdUser.user.multiFactor.user.email,
+      displayName: createdUser.user.multiFactor.user.displayName,
+      uid: createdUser.user.multiFactor.user.uid
+    }
+
+    axios.post('/api/user/join', item).then(res=>{
+      if (res.data.success) {
+        dispatch(logoutUser());
+        alert('회원가입에 성공했습니다.');
+        navigate('/login');
+      } else {
+        return alert('회원가입에 실패했습니다.');
+      }
+    })
   }
 
   return (

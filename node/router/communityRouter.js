@@ -24,7 +24,8 @@ router.post('/create', (request, response)=>{
       const PostModel = new Post({
         title: request.body.title,
         content: request.body.content,
-        communityNum: doc.communityNum
+        communityNum: doc.communityNum,
+        userNum: request.body.userNum,
       })
 
       PostModel.save()
