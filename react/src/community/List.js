@@ -24,13 +24,9 @@ function List() {
   const [ IsSortLatest, setIsSortLatest ] = useState(false);
 
   useEffect(()=>{
-    const sort = {
-      sort: {
-        new: IsSortLatest
-      }
-    }
+    const sort = IsSortLatest ? 'old' : 'latest';
 
-    axios.post('/api/community/read', sort)
+    axios.get('/api/community/read?sort='+sort)
       .then(response=>{
         if (response.data.success) {
           setList(response.data.communityList);

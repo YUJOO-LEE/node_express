@@ -32,7 +32,7 @@ function Main() {
 
   useEffect(()=>{
     const item = {count: 3};
-    axios.post('/api/community/read', item)
+    axios.get('/api/community/read?count='+item.count)
       .then(res=>{
         if(res.data.success) {
           setList(res.data.communityList);

@@ -34,7 +34,7 @@ function Detail() {
   const handleDelete = ()=>{
     if (!window.confirm('정말 삭제하시겠습니까?')) return;
 
-    axios.post('/api/community/delete', item)
+    axios.delete('/api/community/delete/'+item.num)
       .then(response=>{
         if (response.data.success) {
           alert('게시글이 삭제되었습니다.');
@@ -49,7 +49,7 @@ function Detail() {
   }
 
   useEffect(()=>{
-    axios.post('/api/community/detail', item)
+    axios.get('/api/community/detail/'+item.num)
       .then(response=>{
         if (response.data.success) {
           setDetail(response.data.detail);

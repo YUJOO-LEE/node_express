@@ -48,9 +48,9 @@ router.post('/create', (request, response)=>{
 })
 
 //post 불러오기
-router.post('/read', (request, response)=>{
+router.get('/read', (request, response)=>{
   const sort = {};
-  if (request.body.sort?.new) {
+  if (request.query.sort === 'old') {
     sort.createdAt = 1;
   } else {
     sort.createdAt = -1;
@@ -59,7 +59,7 @@ router.post('/read', (request, response)=>{
   Post.find()
     .populate('writer')
     .sort(sort)
-    .limit(request.body.count)
+    .limit(request.query.count)
     .exec()
     .then(doc=>{
       response.json({success: true, communityList: doc});
@@ -71,8 +71,8 @@ router.post('/read', (request, response)=>{
 })
 
 //detail 불러오기
-router.post('/detail', (request, response)=>{
-  Post.findOne({communityNum: request.body.num})
+router.get('/detail/:num', (request, response)=>{
+  Post.findOne({communityNum: request.params.num})
     .populate('writer')
     .exec()
     .then(doc=>{
@@ -84,7 +84,7 @@ router.post('/detail', (request, response)=>{
     })
 })
 
-router.post('/edit', (request, response)=>{
+router.put('/edit', (request, response)=>{
   const temp = {
     title: request.body.title,
     content: request.body.content

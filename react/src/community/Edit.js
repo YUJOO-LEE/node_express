@@ -29,18 +29,18 @@ function Edit() {
       num: params.num
     };
 
-		axios.post('/api/community/edit', item)
-		.then(response=>{
-      if (response.data.success){
-        alert('글 수정이 완료되었습니다.');
-        navigate(`/detail/${params.num}`);
-      } else {
-        alert('글 수정이 실패했습니다.');
-      }
-		})
-		.catch(err=>{
-			console.log(err);
-		})
+		axios.put('/api/community/edit', item)
+      .then(response=>{
+        if (response.data.success){
+          alert('글 수정이 완료되었습니다.');
+          navigate(`/detail/${params.num}`);
+        } else {
+          alert('글 수정이 실패했습니다.');
+        }
+      })
+      .catch(err=>{
+        console.log(err);
+      })
   };
 
   useEffect(()=>{
@@ -51,7 +51,7 @@ function Edit() {
 
   useEffect(()=>{
     const item = {num: params.num};
-    axios.post('/api/community/detail', item)
+    axios.get('/api/community/detail/'+item.num)
       .then(respons=>{
         if (respons.data.success) {
           console.log(respons.data.detail);
