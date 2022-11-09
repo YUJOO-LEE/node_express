@@ -1,6 +1,6 @@
-import Styled from 'styled-components';
+import styled from 'styled-components';
 
-const MainWrap = Styled.main`
+const MainWrap = styled.main`
   width: 100%;
   height: 100vh;
   height: 100dvh;

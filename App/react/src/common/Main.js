@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
-import Layout from './Layout';
 
 const Inner = styled.div`
   width: 100%;

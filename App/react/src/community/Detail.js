@@ -2,17 +2,17 @@ import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
-const DetailWrap = Styled.div`
+const DetailWrap = styled.div`
   width: 100%;
   padding: 40px;
   background: #fff;
   box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
 `;
 
-const BtnSet = Styled.div`
+const BtnSet = styled.div`
   margin-top: 20px;
 
   button{

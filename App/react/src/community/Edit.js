@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Layout from '../common/Layout';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-const BtnSet = Styled.div`
+const BtnSet = styled.div`
   margin-top: 20px;
 
   button{

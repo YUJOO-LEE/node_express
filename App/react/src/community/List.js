@@ -2,9 +2,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../common/Layout';
-import Styled from 'styled-components';
+import styled from 'styled-components';
 
-const Item = Styled.article`
+const Item = styled.article`
   width: 100%;
   padding: 30px 40px;
   background-color: #fff;
@@ -12,7 +12,7 @@ const Item = Styled.article`
   margin-bottom: 50px;
 `;
 
-const BtnSet = Styled.div`
+const BtnSet = styled.div`
   margin-bottom: 20px;
   display: flex;
   justify-content: flex-end;

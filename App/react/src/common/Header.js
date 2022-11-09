@@ -1,12 +1,12 @@
-import Styled from 'styled-components';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../redux/userSlice';
 import firebase from '../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faList, faPenNib, faUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components';
 
-const HeaderWrap = Styled.header`
+const HeaderWrap = styled.header`
   width: 60px;
   height: 100vh;
   height: 100dvh;
@@ -18,7 +18,7 @@ const HeaderWrap = Styled.header`
   background-color: var(--color-dark-gray);
 `;
 
-const Logo = Styled.h1`
+const Logo = styled.h1`
   margin-bottom: 10px;
   font-size: 24px;
   text-align: center;
@@ -29,7 +29,7 @@ const Logo = Styled.h1`
   }
 `;
 
-const Gnb = Styled.div`
+const Gnb = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -105,31 +105,51 @@ const Gnb = Styled.div`
   }
 `;
 
-const Util = Styled.div`
+const Util = styled.div`
   width: 100%;
 
   ul{
     li{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 15px;
+
       a{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         color: var(--color-white);
 
         span{
           display: block;
           height: auto;
           max-height: 0;
+          overflow: hidden;
           font-size: 11px;
           transition: 0.3s;
         }
 
         &:hover{
           span{
-            max-height: 15px;
+            max-height: 20px;
             font-size: 11px;
           }
         }
       }
     }
   }
+`;
+
+const Circle = styled.div`
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border: 1px solid var(--color-white);
+  border-radius: 50%;
+  text-align: center;
+  color: var(--color-white);
 `;
 
 function Header() {
@@ -206,7 +226,11 @@ function Header() {
         <Util>
           {User.accessToken &&
             <ul>
-              <li>{User.displayName}</li>
+              <li>
+                <Circle>
+                  {User.displayName}
+                </Circle>
+              </li>
               <li>
                 <Link
                   onClick={handleLogout}
