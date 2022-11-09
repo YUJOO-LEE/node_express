@@ -12,7 +12,7 @@ const postSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Users'
   }
-}, { collection: 'Posts'});
+}, { collection: 'Posts', timestamps: true});
 
 //모델은 스키마를 통해서 만드는 인스턴스
 const Post = mongoose.model('Posts', postSchema);

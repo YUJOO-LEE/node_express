@@ -49,8 +49,16 @@ router.post('/create', (request, response)=>{
 
 //post 불러오기
 router.post('/read', (request, response)=>{
+  const sort = {};
+  if (request.body.sort.new) {
+    sort.createdAt = -1;
+  } else {
+    sort.createdAt = 1;
+  }
+
   Post.find()
     .populate('writer')
+    .sort(sort)
     .exec()
     .then(doc=>{
       response.json({success: true, communityList: doc});

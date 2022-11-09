@@ -12,27 +12,42 @@ const Item = Styled.article`
   margin-bottom: 50px;
 `;
 
+const BtnSet = Styled.div`
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+`;
+
 function List() {
 
   const [ List, setList ] = useState([]);
-
-  console.log(List);
+  const [ IsSortLatest, setIsSortLatest ] = useState(true);
 
   useEffect(()=>{
-    axios.post('/api/community/read')
+    const sort = {
+      sort: {
+        new: IsSortLatest
+      }
+    }
+
+    axios.post('/api/community/read', sort)
       .then(response=>{
         if (response.data.success) {
-          console.log(response.data.communityList.length);
           setList(response.data.communityList);
         }
       })
       .catch(error=>{
         console.log(error);
       })
-  }, []);
+  }, [IsSortLatest]);
 
   return (
     <Layout name='List'>
+      <BtnSet>
+        <button onClick={()=>setIsSortLatest(!IsSortLatest)}>
+          {IsSortLatest ? 'created ▼' : 'created ▲'}
+        </button>
+      </BtnSet>
       {List.map(post=>{
         return (
           <Item key={post._id}>
@@ -43,6 +58,9 @@ function List() {
             </h2>
             <span>
               {post.writer.displayName}
+            </span>
+            <span>
+              {post.createdAt.split('T')[0]}
             </span>
           </Item>
         )

@@ -70,6 +70,9 @@ function Detail() {
           <DetailWrap>
             <h2>{Detail.title}</h2>
             <p>{Detail.writer.displayName}</p>
+            <p>
+              {Detail.createdAt.split('T')[0]}
+            </p>
             <p>{Detail.content}</p>
           </DetailWrap>
 
