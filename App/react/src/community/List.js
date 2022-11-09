@@ -35,12 +35,13 @@ const Item = styled.article`
 `;
 
 const BtnSet = styled.div`
+  padding-left: 10px;
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   h2{
-    font-family: 'WindSong', cursive;
+    //font-family: 'WindSong', cursive;
     font-weight: 100;
     font-size: 50px;
   }
