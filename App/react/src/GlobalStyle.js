@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
   --color-white: #fff;
   --color-theme: hotpink;
   --color-dark-gray: #222;
+  --color-white-gray: #efefef;
   --font-theme: 'Poiret One', cursive;
   }
 
@@ -25,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body{
-    background-color: var(--color-white);
+    background-color: var(--color-white-gray);
     color: var(--color-black);
     font-family: 'Noto Sans KR', sans-serif;
   }

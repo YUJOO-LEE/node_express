@@ -1,15 +1,19 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Layout from '../common/Layout';
 import styled from 'styled-components';
+import Layout from '../common/Layout';
 
 const Item = styled.article`
   width: 100%;
   padding: 30px 40px;
-  background-color: #fff;
-  box-shadow: 10px 10px 20px rgba(0,0,0,0.2);
-  margin-bottom: 50px;
+  margin-bottom: 20px;
+  background-color: var(--color-white);
+  border-radius: 10px;
+  transition: 0.5s;
+  &:hover{
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
 `;
 
 const BtnSet = styled.div`
@@ -27,9 +31,9 @@ function List() {
     const sort = IsSortLatest ? 'old' : 'latest';
 
     axios.get('/api/community/read?sort='+sort)
-      .then(response=>{
-        if (response.data.success) {
-          setList(response.data.communityList);
+      .then(res=>{
+        if (res.data.success) {
+          setList(res.data.communityList);
         }
       })
       .catch(error=>{
@@ -47,17 +51,17 @@ function List() {
       {List.map(post=>{
         return (
           <Item key={post._id}>
-            <h2>
-              <Link to={`/detail/${post.communityNum}`}>
-                {post.title}
-              </Link>
-            </h2>
-            <span>
-              {post.writer.displayName}
-            </span>
-            <span>
-              {post.createdAt.split('T')[0]}
-            </span>
+            <Link to={`/detail/${post.communityNum}`}>
+              <h2>
+                  {post.title}
+              </h2>
+              <span>
+                {post.writer.displayName}
+              </span>
+              <span>
+                {post.createdAt.split('T')[0]}
+              </span>
+            </Link>
           </Item>
         )
       })}

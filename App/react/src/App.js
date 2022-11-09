@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import GlobalStyle from './GlobalStyle';
-import Layout from './common/Layout';
 import Header from './common/Header';
 import Main from './common/Main';
 import List from './community/List';
@@ -39,8 +38,7 @@ function App() {
       <ThemeProvider>
 				<Header />
 
-        <Layout>
-					<Routes>
+				<Routes>
 						<Route path='/' element={<Main />} />
 						<Route path='/list' element={<List />} />
 						<Route path='/create' element={<Create />} />
@@ -49,7 +47,6 @@ function App() {
 						<Route path='/join' element={<Join />} />
 						<Route path='/login' element={<Login />} />
 					</Routes>
-        </Layout>
       </ThemeProvider>
 		</>
 	);

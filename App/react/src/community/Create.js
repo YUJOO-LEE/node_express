@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Layout from '../common/Layout';
 
 function Create() {
 
@@ -40,7 +41,7 @@ function Create() {
   }, [])
 
   return (
-    <>
+    <Layout name='Create'>
       <ul>
         <li>
           <label htmlFor='title'>Title</label>
@@ -65,7 +66,7 @@ function Create() {
           >SEND</button>
         </li>
       </ul>
-    </>
+    </Layout>
   )
 }
 

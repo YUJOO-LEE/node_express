@@ -4,7 +4,7 @@ const MainWrap = styled.main`
   width: 100%;
   height: 100vh;
   height: 100dvh;
-  padding-left: 50px;
+  padding: 50px 50px 50px 100px;
   overflow: hidden;
   position: relative;
 `;

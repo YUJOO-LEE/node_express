@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
+import Layout from '../common/Layout';
 
 const Inner = styled.div`
   width: 100%;
@@ -103,36 +104,38 @@ function Main() {
   }, []);
 
   return (
-    <Inner>
-      <WelcomeMsg>
-        {User.displayName && 
-          <span className='userName'>{User.displayName}</span>
-        }
-        <span className='back'>HELLO</span>
-        <span className='front'>Yujoo's world</span>
-      </WelcomeMsg>
-      <MainList>
-        {List.map((post)=>{
-          return(
-            <article key={post._id}>
-              <h2>
-                <Link to={`/detail/${post.communityNum}`}>
-                  {post.title}
-                </Link>
-              </h2>
-              <div className='info'>
-                <p>
-                  {post.writer.displayName}
-                </p>
-                <p>
-                  {post.createdAt.split('T')[0]}
-                </p>
-              </div>
-            </article>
-          );
-        })}
-      </MainList>
-    </Inner>
+    <Layout name='Main'>
+      <Inner>
+        <WelcomeMsg>
+          {User.displayName && 
+            <span className='userName'>{User.displayName}</span>
+          }
+          <span className='back'>HELLO</span>
+          <span className='front'>Yujoo's world</span>
+        </WelcomeMsg>
+        <MainList>
+          {List.map((post)=>{
+            return(
+              <article key={post._id}>
+                <h2>
+                  <Link to={`/detail/${post.communityNum}`}>
+                    {post.title}
+                  </Link>
+                </h2>
+                <div className='info'>
+                  <p>
+                    {post.writer.displayName}
+                  </p>
+                  <p>
+                    {post.createdAt.split('T')[0]}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
+        </MainList>
+      </Inner>
+    </Layout>
   )
 }
 

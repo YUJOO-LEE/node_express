@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import Layout from '../common/Layout';
 
 const DetailWrap = styled.div`
   width: 100%;
@@ -65,7 +66,7 @@ function Detail() {
   return (
     <>
       {Loaded ? Detail &&
-        <>
+        <Layout name='Detail'>
           <DetailWrap>
             <h2>{Detail.title}</h2>
             <p>{Detail.writer.displayName}</p>
@@ -81,7 +82,7 @@ function Detail() {
               <button onClick={handleDelete}>DELETE</button>
             </BtnSet>
           }
-        </>
+        </Layout>
       : <p>Loading...</p>
       }
     </>

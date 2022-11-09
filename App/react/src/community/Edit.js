@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import Layout from '../common/Layout';
 
 const BtnSet = styled.div`
   margin-top: 20px;
@@ -76,7 +77,7 @@ function Edit() {
   return (
     <>
       {Loaded ?
-        <>
+        <Layout name='Edit'>
           <ul>
             <li>
               <label htmlFor='title'>Title</label>
@@ -98,7 +99,7 @@ function Edit() {
             <button onClick={()=>navigate(-1)}>Cancel</button>
             <button onClick={handleUpdate}>Update</button>
           </BtnSet>
-        </>
+        </Layout>
       : <p>Loading...</p>
       }
     </>
