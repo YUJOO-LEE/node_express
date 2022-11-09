@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import GlobalStyle from './GlobalStyle';
+import Layout from './common/Layout';
 import Header from './common/Header';
 import Main from './common/Main';
 import List from './community/List';
@@ -12,6 +13,8 @@ import Join from './user/Join';
 import firebase from './firebase';
 import { loginUser, logoutUser } from './redux/userSlice';
 import { useDispatch } from 'react-redux';
+import { ThemeProvider } from './theme/themeProvider';
+
 
 function App() {
 
@@ -32,17 +35,22 @@ function App() {
 	return (
 		<>
 			<GlobalStyle />
-			<Header />
 
-			<Routes>
-				<Route path='/' element={<Main />} />
-				<Route path='/list' element={<List />} />
-				<Route path='/create' element={<Create />} />
-				<Route path='/detail/:num' element={<Detail />} />
-				<Route path='/edit/:num' element={<Edit />} />
-				<Route path='/join' element={<Join />} />
-				<Route path='/login' element={<Login />} />
-			</Routes>
+      <ThemeProvider>
+				<Header />
+
+        <Layout>
+					<Routes>
+						<Route path='/' element={<Main />} />
+						<Route path='/list' element={<List />} />
+						<Route path='/create' element={<Create />} />
+						<Route path='/detail/:num' element={<Detail />} />
+						<Route path='/edit/:num' element={<Edit />} />
+						<Route path='/join' element={<Join />} />
+						<Route path='/login' element={<Login />} />
+					</Routes>
+        </Layout>
+      </ThemeProvider>
 		</>
 	);
 }

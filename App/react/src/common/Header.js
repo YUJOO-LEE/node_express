@@ -3,53 +3,133 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../redux/userSlice';
 import firebase from '../firebase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse, faList, faPenNib, faUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 const HeaderWrap = Styled.header`
-  width: 350px;
+  width: 60px;
   height: 100vh;
-  background: #222;
+  height: 100dvh;
+  padding: 30px 0;
   position: fixed;
   top: 0;
   left: 0;
-  padding: 50px;
+  z-index: 10;
+  background-color: var(--color-dark-gray);
 `;
 
 const Logo = Styled.h1`
-  margin-bottom: 40px;
-  a{
-    font: 50px/1 'arial';
-    color: #fff;
+  margin-bottom: 10px;
+  font-size: 24px;
+  text-align: center;
+  color: var(--color-white);
+  transition: 0.3s;
+  &:hover{
+    color: var(--color-theme);
   }
 `;
 
-const Gnb = Styled.ul`
-  a{
-    display: block;
-    padding: 10px;
-    font: bold 16px/1 'arial';
-    color: #bbb;
-
-    &:hover{
-      color: hotpink;
-    }
-  }
-`;
-
-const Util = Styled.ul`
-  position: absolute;
-  bottom: 50px;
-  left: 50px;
+const Gnb = Styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
-  gap: 20px;
-  li{
-    color: #777;
+  flex-direction: column;
+  justify-content: space-between;
+  ul{
+    width: 100%;
+    li{
+      padding: 5px 0;
+      >a{
+        display: block;
+        .wrap{
+          display: block;
+          .icon{
+            width: 100%;
+            padding: 15px 10px;
+            font-size: 18px;
+            color: var(--color-white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
 
-    a{
-      font: 14px/1 'arial';
-      color: #777;
+            .txt{
+              height: auto;
+              max-height: 0;
+              overflow: hidden;
+              font-size: 11px;
+              transition: 0.3s;
+            }
+          }
+        }
+        .header,.footer{
+          display: block;
+          width: 100%;
+          height: 0;
+        }
+        &:hover{
+          .wrap{
+            .icon{
+              .txt{
+                padding-top: 10px;
+                max-height: 25px;
+                font-size: 11px;
+              }
+            }
+          }
+        }
+        &.active{
+          margin-left: 10px;
+          background-color: var(--color-white);
+          .wrap{
+            background-color: var(--color-dark-gray);
+            .icon{
+              background-color: var(--color-white);
+              border-radius: 10px 0 0 10px;
+              color: var(--color-theme);
+            }
+          }
+          .header{
+            height: 10px;
+            background-color: var(--color-dark-gray);
+            border-radius: 0 0 10px 0;
+          }
+          .footer{
+            height: 10px;
+            background-color: var(--color-dark-gray);
+            border-radius: 0 10px 0 0;
+          }
+        }
+      }
     }
   }
+`;
 
+const Util = Styled.div`
+  width: 100%;
+
+  ul{
+    li{
+      a{
+        color: var(--color-white);
+
+        span{
+          display: block;
+          height: auto;
+          max-height: 0;
+          font-size: 11px;
+          transition: 0.3s;
+        }
+
+        &:hover{
+          span{
+            max-height: 15px;
+            font-size: 11px;
+          }
+        }
+      }
+    }
+  }
 `;
 
 function Header() {
@@ -69,63 +149,76 @@ function Header() {
   
   return (
     <HeaderWrap>
-      <Logo>
-        <NavLink to='/'>
-          LOGO
-        </NavLink>
-      </Logo>
 
       <Gnb id='gnb'>
-        <li>
-          <NavLink to='/list'
-            style={({isActive})=> isActive ? activeStyle : null}
-          >
-            Show List
+        <Logo>
+          <NavLink to='/'>
+            <FontAwesomeIcon icon={faHouse} />
           </NavLink>
-        </li>
-        {User.accessToken &&
+        </Logo>
+        <ul>
           <li>
-            <NavLink to='/create'
+            <NavLink to='/list'
               style={({isActive})=> isActive ? activeStyle : null}
             >
-              Write Post
+              <span className='header'></span>
+              <span className='wrap'>
+                <span className='icon'>
+                  <FontAwesomeIcon icon={faList} />
+                  <span className='txt'>List</span>
+                </span>
+              </span>
+              <span className='footer'></span>
             </NavLink>
           </li>
-        }
-      </Gnb>
-
-      <Util>
-        {User.accessToken 
-        ? 
-          <>
-            <li>{User.displayName} 님 환영합니다.</li>
+          {User.accessToken ?
             <li>
-              <Link
-                onClick={handleLogout}
+              <NavLink to='/create'
+                style={({isActive})=> isActive ? activeStyle : null}
               >
-                Logout
-              </Link>
+                <span className='header'></span>
+                <span className='wrap'>
+                  <span className='icon'>
+                    <FontAwesomeIcon icon={faPenNib} />
+                    <span className='txt'>Write</span>
+                  </span>
+                </span>
+                <span className='footer'></span>
+              </NavLink>
             </li>
-          </>
-        :
-          <>
+          :
             <li>
               <NavLink to='/login'
                 style={({isActive})=> isActive ? activeStyle : null}
               >
-                Login
+                <span className='header'></span>
+                <span className='wrap'>
+                  <span className='icon'>
+                    <FontAwesomeIcon icon={faUser} />
+                    <span className='txt'>Login</span>
+                  </span>
+                </span>
+                <span className='footer'></span>
               </NavLink>
             </li>
-            <li>
-              <NavLink to='/join'
-                style={({isActive})=> isActive ? activeStyle : null}
-              >
-                Join
-              </NavLink>
-            </li>
-          </>
-        }
-      </Util>
+          }
+        </ul>
+        <Util>
+          {User.accessToken &&
+            <ul>
+              <li>{User.displayName}</li>
+              <li>
+                <Link
+                  onClick={handleLogout}
+                >
+                  <FontAwesomeIcon icon={faArrowRightFromBracket}></FontAwesomeIcon>
+                  <span>Logout</span>
+                </Link>
+              </li>
+            </ul>
+          }
+        </Util>
+      </Gnb>
     </HeaderWrap>
   )
 }
