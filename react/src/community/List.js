@@ -21,7 +21,7 @@ const BtnSet = Styled.div`
 function List() {
 
   const [ List, setList ] = useState([]);
-  const [ IsSortLatest, setIsSortLatest ] = useState(true);
+  const [ IsSortLatest, setIsSortLatest ] = useState(false);
 
   useEffect(()=>{
     const sort = {
@@ -45,7 +45,7 @@ function List() {
     <Layout name='List'>
       <BtnSet>
         <button onClick={()=>setIsSortLatest(!IsSortLatest)}>
-          {IsSortLatest ? 'created ▼' : 'created ▲'}
+          {IsSortLatest ? 'created ▲' : 'created ▼'}
         </button>
       </BtnSet>
       {List.map(post=>{

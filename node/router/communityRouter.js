@@ -50,15 +50,16 @@ router.post('/create', (request, response)=>{
 //post 불러오기
 router.post('/read', (request, response)=>{
   const sort = {};
-  if (request.body.sort.new) {
-    sort.createdAt = -1;
-  } else {
+  if (request.body.sort?.new) {
     sort.createdAt = 1;
+  } else {
+    sort.createdAt = -1;
   }
 
   Post.find()
     .populate('writer')
     .sort(sort)
+    .limit(request.body.count)
     .exec()
     .then(doc=>{
       response.json({success: true, communityList: doc});
@@ -100,8 +101,8 @@ router.post('/edit', (request, response)=>{
     })
 })
 
-router.post('/delete', (request, response)=>{
-  Post.deleteOne({communityNum: request.body.num})
+router.delete('/delete/:num', (request, response)=>{
+  Post.deleteOne({communityNum: request.params.num})
     .exec()
     .then(()=>{
       response.json({success: true});
