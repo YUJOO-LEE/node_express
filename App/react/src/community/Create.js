@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Layout from '../common/Layout';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -20,8 +19,8 @@ function Create() {
     };
 
 		axios.post('/api/community/create', item)
-		.then(response=>{
-      if (response.data.success){
+		.then(res=>{
+      if (res.data.success){
         alert('글 저장이 완료되었습니다.');
         navigate('/list');
       } else {
@@ -41,7 +40,7 @@ function Create() {
   }, [])
 
   return (
-    <Layout name='Post'>
+    <>
       <ul>
         <li>
           <label htmlFor='title'>Title</label>
@@ -66,7 +65,7 @@ function Create() {
           >SEND</button>
         </li>
       </ul>
-    </Layout>
+    </>
   )
 }
 

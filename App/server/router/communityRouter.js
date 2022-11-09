@@ -12,7 +12,7 @@ const { User } = require('../model/userSchema.js');
 //react로부터 받은 요청 처리
 
 //create
-router.post('/create', (request, response)=>{
+router.post('/create', (req, res)=>{
 
   // Counter 모델로 communityNum 값을 찾아서 전달받은 데이터와 합치기
   // Counter 모델레 findOne 메서드로 찾을 Document 의 조건 설정
@@ -22,7 +22,7 @@ router.post('/create', (request, response)=>{
     .then(doc=>{
       // 기존 프론트에서 받은 데이터에 communityNum 값 추가
 
-      const temp = request.body;
+      const temp = req.body;
       temp.communityNum = doc.communityNum;
 
       User.findOne({uid: temp.uid})
@@ -36,21 +36,21 @@ router.post('/create', (request, response)=>{
             .then(()=>{
               Counter.updateOne({name: 'counter'}, {$inc: {communityNum: 1}})
                 .then(()=>{
-                  response.json({success: true});
+                  res.json({success: true});
                 })
             })
             .catch(error=>{
               console.log(error);
-              response.json({success: false})
+              res.json({success: false})
             });
         })
     })
 })
 
 //post 불러오기
-router.get('/read', (request, response)=>{
+router.get('/read', (req, res)=>{
   const sort = {};
-  if (request.query.sort === 'old') {
+  if (req.query.sort === 'old') {
     sort.createdAt = 1;
   } else {
     sort.createdAt = -1;
@@ -59,57 +59,57 @@ router.get('/read', (request, response)=>{
   Post.find()
     .populate('writer')
     .sort(sort)
-    .limit(request.query.count)
+    .limit(req.query.count)
     .exec()
     .then(doc=>{
-      response.json({success: true, communityList: doc});
+      res.json({success: true, communityList: doc});
     })
     .catch(error=>{
       console.log(error);
-      response.json({success: false});
+      res.json({success: false});
     })
 })
 
 //detail 불러오기
-router.get('/detail/:num', (request, response)=>{
-  Post.findOne({communityNum: request.params.num})
+router.get('/detail/:num', (req, res)=>{
+  Post.findOne({communityNum: req.params.num})
     .populate('writer')
     .exec()
     .then(doc=>{
-      response.json({success: true, detail: doc});
+      res.json({success: true, detail: doc});
     })
     .catch(error=>{
       console.log(error);
-      response.json({success: false});
+      res.json({success: false});
     })
 })
 
-router.put('/edit', (request, response)=>{
+router.put('/edit', (req, res)=>{
   const temp = {
-    title: request.body.title,
-    content: request.body.content
+    title: req.body.title,
+    content: req.body.content
   }
 
-  Post.updateOne({communityNum: request.body.num}, {$set: temp})
+  Post.updateOne({communityNum: req.body.num}, {$set: temp})
     .exec()
     .then(()=>{
-      response.json({success: true});
+      res.json({success: true});
     })
     .catch(error=>{
       console.error(error);
-      response.json({success: false});
+      res.json({success: false});
     })
 })
 
-router.delete('/delete/:num', (request, response)=>{
-  Post.deleteOne({communityNum: request.params.num})
+router.delete('/delete/:num', (req, res)=>{
+  Post.deleteOne({communityNum: req.params.num})
     .exec()
     .then(()=>{
-      response.json({success: true});
+      res.json({success: true});
     })
     .catch(error=>{
       console.error(error);
-      response.json({success: false});
+      res.json({success: false});
     })
 })
 

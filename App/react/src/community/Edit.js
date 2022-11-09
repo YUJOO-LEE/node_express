@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Layout from '../common/Layout';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -32,8 +31,8 @@ function Edit() {
     };
 
 		axios.put('/api/community/edit', item)
-      .then(response=>{
-        if (response.data.success){
+      .then(res=>{
+        if (res.data.success){
           alert('글 수정이 완료되었습니다.');
           navigate(`/detail/${params.num}`);
         } else {
@@ -54,10 +53,10 @@ function Edit() {
   useEffect(()=>{
     const item = {num: params.num};
     axios.get('/api/community/detail/'+item.num)
-      .then(respons=>{
-        if (respons.data.success) {
-          //console.log(respons.data.detail);
-          setDetail(respons.data.detail);
+      .then(res=>{
+        if (res.data.success) {
+          //console.log(res.data.detail);
+          setDetail(res.data.detail);
         }
       })
       .catch(error=>{
@@ -75,7 +74,7 @@ function Edit() {
   }, [Detail])
 
   return (
-    <Layout name='Edit'>
+    <>
       {Loaded ?
         <>
           <ul>
@@ -102,7 +101,7 @@ function Edit() {
         </>
       : <p>Loading...</p>
       }
-    </Layout>
+    </>
   )
 }
 

@@ -31,11 +31,11 @@ app.listen(port, ()=>{
     );
 });
 
-app.get('/', (request, response)=>{
-  //response.send('Hello World');
-  response.sendFile(path.join(__dirname, './react/build/index.html'));
+app.get('/', (req, res)=>{
+  //res.send('Hello World');
+  res.sendFile(path.join(__dirname, './react/build/index.html'));
 });
 
-app.get('*', (request, response)=>{
-  response.sendFile(path.join(__dirname, './react/build/index.html'));
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, './react/build/index.html'));
 });
