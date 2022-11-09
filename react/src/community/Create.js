@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -32,6 +32,13 @@ function Create() {
 			console.log(err);
 		})
 	}
+
+  useEffect(()=>{
+    if (User && !User.uid) {
+      alert('로그인 후 작성이 가능합니다.');
+      navigate('/login');
+    }
+  }, [])
 
   return (
     <Layout name='Post'>

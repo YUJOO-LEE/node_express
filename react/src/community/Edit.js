@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Layout from '../common/Layout';
 import Styled from 'styled-components';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const BtnSet = Styled.div`
   margin-top: 20px;
@@ -20,6 +21,7 @@ function Edit() {
   const [ Title, setTitle ] = useState('');
   const [ Content, setContent ] = useState('');
   const [ Loaded, setLoaded ] = useState(false);
+  const User = useSelector(store=>store.user);
 
   const handleUpdate = ()=>{
     if (!Title.trim() || !Content.trim()) return alert('제목과 본문을 모두 입력하세요.');
@@ -54,7 +56,7 @@ function Edit() {
     axios.get('/api/community/detail/'+item.num)
       .then(respons=>{
         if (respons.data.success) {
-          console.log(respons.data.detail);
+          //console.log(respons.data.detail);
           setDetail(respons.data.detail);
         }
       })
@@ -63,6 +65,15 @@ function Edit() {
       })
   }, [])
   
+  useEffect(()=>{
+    if (!Detail.writer) return;
+    
+    if (User.uid !== Detail.writer.uid) {
+      alert('본인만 수정이 가능합니다.');
+      navigate(-1);
+    }
+  }, [Detail])
+
   return (
     <Layout name='Edit'>
       {Loaded ?
