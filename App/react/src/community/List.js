@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Layout from '../common/Layout';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 
 const Item = styled.article`
   width: 100%;
-  padding: 30px 40px;
+  padding: 20px 30px;
   margin-bottom: 20px;
   background-color: var(--color-white);
   border-radius: 10px;
@@ -14,21 +16,43 @@ const Item = styled.article`
   &:hover{
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   }
+  a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    h3{
+      flex: 1;
+      font-size: 16px;
+      font-weight: 300;
+    }
+    span{
+      font-size: 14px;
+      font-weight: 100;
+    }
+  }
 `;
 
 const BtnSet = styled.div`
   margin-bottom: 20px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: flex-end;
+  h2{
+    font-family: 'WindSong', cursive;
+    font-weight: 100;
+    font-size: 50px;
+  }
 `;
 
 function List() {
 
   const [ List, setList ] = useState([]);
-  const [ IsSortLatest, setIsSortLatest ] = useState(false);
+  const [ IsSortLatest, setIsSortLatest ] = useState(true);
 
   useEffect(()=>{
-    const sort = IsSortLatest ? 'old' : 'latest';
+    const sort = IsSortLatest ? 'latest' : 'old';
 
     axios.get('/api/community/read?sort='+sort)
       .then(res=>{
@@ -44,17 +68,26 @@ function List() {
   return (
     <Layout name='List'>
       <BtnSet>
+        <h2>
+          Article List
+        </h2>
         <button onClick={()=>setIsSortLatest(!IsSortLatest)}>
-          {IsSortLatest ? 'created ▲' : 'created ▼'}
+          {IsSortLatest ? 
+            <>작성일 <FontAwesomeIcon icon={faCaretDown}></FontAwesomeIcon></>
+          : <>작성일 <FontAwesomeIcon icon={faCaretUp}></FontAwesomeIcon></>
+          }
         </button>
       </BtnSet>
       {List.map(post=>{
         return (
           <Item key={post._id}>
             <Link to={`/detail/${post.communityNum}`}>
-              <h2>
+              <span>
+                {post.communityNum}
+              </span>
+              <h3>
                   {post.title}
-              </h2>
+              </h3>
               <span>
                 {post.writer.displayName}
               </span>

@@ -41,7 +41,7 @@ function App() {
 				<Routes>
 						<Route path='/' element={<Main />} />
 						<Route path='/list' element={<List />} />
-						<Route path='/create' element={<Create />} />
+						<Route path='/write' element={<Create />} />
 						<Route path='/detail/:num' element={<Detail />} />
 						<Route path='/edit/:num' element={<Edit />} />
 						<Route path='/join' element={<Join />} />

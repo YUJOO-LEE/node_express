@@ -80,11 +80,11 @@ const Gnb = styled.div`
         }
         &.active{
           margin-left: 10px;
-          background-color: var(--color-white);
+          background-color: var(--color-white-gray);
           .wrap{
             background-color: var(--color-dark-gray);
             .icon{
-              background-color: var(--color-white);
+              background-color: var(--color-white-gray);
               border-radius: 10px 0 0 10px;
               color: var(--color-theme);
             }
@@ -193,7 +193,7 @@ function Header() {
           </li>
           {User.accessToken ?
             <li>
-              <NavLink to='/create'
+              <NavLink to='/write'
                 style={({isActive})=> isActive ? activeStyle : null}
               >
                 <span className='header'></span>
