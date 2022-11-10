@@ -14,7 +14,7 @@ const PopupWrap = styled.div`
   transition: 0.5s;
   
   ul{
-    width: 30%;
+    width: max(30%, 280px);
     padding: 50px 30px 30px;
     display: flex;
     flex-direction: column;
