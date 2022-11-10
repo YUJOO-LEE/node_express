@@ -20,16 +20,11 @@ const HeaderWrap = styled.header`
   left: 0;
   z-index: 10;
   background-color: ${props=>props.theme.bgColor};
-`;
 
-const Logo = styled.h1`
-  margin-bottom: 10px;
-  font-size: 24px;
-  text-align: center;
-  color: ${props=>props.theme.normalColor};
-  transition: 0.3s;
-  &:hover{
-    color: ${props=>props.theme.pointColor};
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
   }
 `;
 
@@ -43,69 +38,148 @@ const Gnb = styled.div`
     width: 100%;
     li{
       padding: 5px 0;
-      >a{
-        display: block;
-        .wrap{
-          display: block;
-          .icon{
-            width: 100%;
-            padding: 15px 10px;
-            font-size: 18px;
-            color: ${props=>props.theme.normalColor};
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+    }
+  }
 
-            .txt{
-              height: auto;
-              max-height: 0;
-              overflow: hidden;
-              font-size: 11px;
-              transition: 0.3s;
-            }
-          }
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    flex-direction: row;
+    align-items: center;
+    ul{
+      width: auto;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      li{
+        height: 100%;
+        padding: 0;
+      }
+    }
+  }
+`;
+
+const NavBtn = styled.li`
+  a{
+    display: block;
+    .wrap{
+      display: block;
+      .icon{
+        width: 100%;
+        padding: 15px 10px;
+        font-size: 18px;
+        border-radius: 10px 0 0 10px;
+        color: ${props=>props.theme.normalColor};
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .txt{
+          height: auto;
+          max-height: 0;
+          overflow: hidden;
+          font-size: 11px;
+          transition: 0.3s;
         }
-        .header,.footer{
-          display: block;
-          width: 100%;
-          height: 0;
-        }
-        &:hover{
-          .wrap{
-            .icon{
-              .txt{
-                padding-top: 10px;
-                max-height: 25px;
-                font-size: 11px;
-              }
-            }
-          }
-        }
-        &.active{
-          margin-left: 10px;
-          background-color: ${props=>props.theme.brightColor};
-          .wrap{
-            background-color: ${props=>props.theme.bgColor};
-            .icon{
-              background-color: ${props=>props.theme.brightColor};
-              border-radius: 10px 0 0 10px;
-              color: ${props=>props.theme.pointColor};
-            }
-          }
-          .header{
-            height: 10px;
-            background-color: ${props=>props.theme.bgColor};
-            border-radius: 0 0 10px 0;
-          }
-          .footer{
-            height: 10px;
-            background-color: ${props=>props.theme.bgColor};
-            border-radius: 0 10px 0 0;
+      }
+    }
+    .header,.footer{
+      display: block;
+      width: 100%;
+      height: 0;
+    }
+    &:hover{
+      .wrap{
+        .icon{
+          .txt{
+            padding-top: 10px;
+            max-height: 25px;
+            font-size: 11px;
           }
         }
       }
     }
+    &.active{
+      margin-left: 10px;
+      background-color: ${props=>props.theme.brightColor};
+      .wrap{
+        background-color: ${props=>props.theme.bgColor};
+        .icon{
+          background-color: ${props=>props.theme.brightColor};
+          color: ${props=>props.theme.pointColor};
+        }
+      }
+      .header{
+        height: 10px;
+        background-color: ${props=>props.theme.bgColor};
+        border-radius: 0 0 10px 0;
+      }
+      .footer{
+        height: 10px;
+        background-color: ${props=>props.theme.bgColor};
+        border-radius: 0 10px 0 0;
+      }
+    }
+  }
+
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    a{
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      .wrap{
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        .icon{
+          padding: 15px;
+          border-radius: 10px 10px 0 0;
+          .txt{
+            display: none;
+          }
+        }
+      }
+      .header,.footer{
+        display: block;
+        width: 0;
+        height: 100%;
+      }
+      &.active{
+        margin: 0;
+        .header{
+          width: 10px;
+          height: 100%;
+          background-color: ${props=>props.theme.bgColor};
+          border-radius: 0 0 10px 0;
+        }
+        .footer{
+          width: 10px;
+          height: 100%;
+          background-color: ${props=>props.theme.bgColor};
+          border-radius: 0 0 0 10px;
+        }
+      }
+    }
+  }
+`;
+
+const Logo = styled.h1`
+  margin-bottom: 10px;
+  text-align: center;
+  color: ${props=>props.theme.normalColor};
+  transition: 0.3s;
+  a{
+    display: block;
+    font-size: 0;
+    svg{
+      font-size: 24px;
+    }
+  }
+  &:hover{
+    color: ${props=>props.theme.pointColor};
+  }
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    margin-bottom: 0;
+    padding-right: 15px;
   }
 `;
 
@@ -144,6 +218,26 @@ const Util = styled.div`
       }
     }
   }
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    width: auto;
+    display: flex;
+    align-items: center;
+    ul{
+      width: 30px;
+      li{
+        width: auto;
+        margin-top: auto;
+        flex-direction: row;
+        a{
+          &:hover{
+            span{
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
 `;
 
 const Circle = styled.div`
@@ -154,6 +248,9 @@ const Circle = styled.div`
   border-radius: 50%;
   text-align: center;
   color: ${props=>props.theme.normalColor};
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    display: none;
+  }
 `;
 
 function Header() {
@@ -186,7 +283,7 @@ function Header() {
           </NavLink>
         </Logo>
         <ul>
-          <li>
+          <NavBtn>
             <NavLink to='/list'
               style={({isActive})=> isActive ? activeStyle : null}
             >
@@ -199,9 +296,9 @@ function Header() {
               </span>
               <span className='footer'></span>
             </NavLink>
-          </li>
+          </NavBtn>
           {User.accessToken ?
-            <li>
+            <NavBtn>
               <NavLink to='/write'
                 style={({isActive})=> isActive ? activeStyle : null}
               >
@@ -214,9 +311,9 @@ function Header() {
                 </span>
                 <span className='footer'></span>
               </NavLink>
-            </li>
+            </NavBtn>
           :
-            <li>
+            <NavBtn>
               <NavLink to='/login'
                 style={({isActive})=> isActive ? activeStyle : null}
               >
@@ -229,7 +326,7 @@ function Header() {
                 </span>
                 <span className='footer'></span>
               </NavLink>
-            </li>
+            </NavBtn>
           }
         </ul>
         <Util>

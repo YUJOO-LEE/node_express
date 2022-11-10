@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 const MainWrap = styled.main`
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  height: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
   padding: 50px 50px 50px 100px;
   overflow: hidden;
   position: relative;
-  background-color: ${props=>props.theme.brightColor};
   color: ${props=>props.theme.normalColor};
 
   button{
@@ -50,6 +50,11 @@ const MainWrap = styled.main`
     font-weight: 300;
     color: ${props=>props.theme.pointColor};
   }
+
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    padding: 80px 20px 20px;
+  }
+
 `;
 
 

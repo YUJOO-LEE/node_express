@@ -53,6 +53,9 @@ const WelcomeMsg = styled.h2`
     z-index: 1;
     transform: translate(-50%, -50%);
   }
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    height: 30%;
+  }
 `;
 
 const MainList = styled.section`
@@ -82,6 +85,14 @@ const MainList = styled.section`
       font-size: 11px;
       font-weight: 100;
       color: ${props=>props.theme.normalColor};
+    }
+  }
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    flex-direction: column;
+    gap: 20px;
+    article{
+      width: 100%;
+      height: auto;
     }
   }
 `;

@@ -33,6 +33,15 @@ const ArticleHeader = styled.div`
       font-weight: 500;
     }
   }
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    p{
+      width: 100%;
+      align-items: flex-end;
+    }
+  }
 `;
 
 const Content = styled.div`

@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body{
+    background-color: ${props=>props.theme.brightColor};
     font-family: 'Noto Sans KR', sans-serif;
   }
 `;

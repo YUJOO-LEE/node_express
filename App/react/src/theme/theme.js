@@ -1,4 +1,5 @@
 export const lightTheme = {
+  mo: '539px',
   bgColor: '#efefef',
   normalColor: '#000',
   pointColor: 'hotpink',
@@ -8,6 +9,7 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
+  mo: '539px',
   bgColor: '#222',
   normalColor: '#fff',
   pointColor: 'hotpink',

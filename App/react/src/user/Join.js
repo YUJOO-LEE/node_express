@@ -17,10 +17,13 @@ const Inner = styled.form`
 `;
 
 const FormWrap = styled.ul`
-  width: 30%;
+  width: max(30%, 300px);
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    width: 80%;
+  }
 `;
 
 const BtnSet = styled.li`

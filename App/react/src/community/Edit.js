@@ -29,6 +29,11 @@ const PageTitle = styled.div`
     font-weight: 100;
     font-size: 50px;
   }
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    h2{
+      font-size: 30px;
+    }
+  }
 `;
 
 function Edit() {

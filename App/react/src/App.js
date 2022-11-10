@@ -33,9 +33,8 @@ function App() {
 
 	return (
 		<>
-			<GlobalStyle />
-
       <ThemeProvider>
+				<GlobalStyle />
 				<Header/>
 
 				<Routes>

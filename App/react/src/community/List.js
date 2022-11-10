@@ -32,6 +32,22 @@ const Item = styled.article`
       font-weight: 100;
     }
   }
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    a{
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-content: center;
+      gap: 10px;
+      h3{
+        flex: 0 0 85%;
+      }
+      span{
+        &:first-of-type{
+          width: 10%;
+        }
+      }
+    }
+  }
 `;
 
 const PageTitle = styled.div`
@@ -43,6 +59,11 @@ const PageTitle = styled.div`
   h2{
     font-weight: 100;
     font-size: 50px;
+  }
+  @media screen and (max-width: ${props=>props.theme.mo}) {
+    h2{
+      font-size: 30px;
+    }
   }
 `;
 
