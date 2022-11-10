@@ -1,15 +1,16 @@
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 
 const ToggleWrapper = styled.div`
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  font-size: 11px;
-  font-weight: 300;
+  font-size: 14px;
   border-width: 2px;
   border-style: solid;
   box-shadow: 0 5px 10px rgba(0,0,0,0.3);
@@ -29,7 +30,7 @@ const ToggleWrapper = styled.div`
 function ThemeToggle({ setTheme, Theme }) {
   return (
     <ToggleWrapper onClick={()=>setTheme()} Theme={Theme} className={Theme}>
-      {Theme === 'dark' ? 'light' : 'dark'}
+      <FontAwesomeIcon icon={faArrowsRotate} />
     </ToggleWrapper>
   );
 }

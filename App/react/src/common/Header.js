@@ -1,14 +1,14 @@
+import { useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../redux/userSlice';
 import firebase from '../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faList, faPenNib, faUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faList, faPenNib, faUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 import { useTheme } from '../theme/themeProvider';
 import ThemeToggle from './ThemeToggle';
 import Popup from './Popup';
-import { useState } from 'react';
 
 const HeaderWrap = styled.header`
   width: 60px;
