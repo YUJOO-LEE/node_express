@@ -3,6 +3,30 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Layout from '../common/Layout';
+import styled from 'styled-components';
+
+const FormWrap = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const LabelWrap = styled.label`
+  padding-left: 10px;
+  margin-bottom: 10px;
+  display: block;
+  font-size: 24px;
+  font-weight: 300;
+`;
+
+const PageTitle = styled.div`
+  padding-left: 10px;
+  margin-bottom: 20px;
+  h2{
+    font-weight: 100;
+    font-size: 50px;
+  }
+`;
 
 function Create() {
 
@@ -42,9 +66,14 @@ function Create() {
 
   return (
     <Layout name='Create'>
-      <ul>
+      <PageTitle>
+        <h2>
+          Write a new Article
+        </h2>
+      </PageTitle>
+      <FormWrap>
         <li>
-          <label htmlFor='title'>Title</label>
+          <LabelWrap htmlFor='title'>Title</LabelWrap>
           <input type='text'
             name='title' id='title'
             value={Title}
@@ -52,10 +81,10 @@ function Create() {
           />
         </li>
         <li>
-          <label htmlFor='content'>Content</label>
+          <LabelWrap htmlFor='content'>Content</LabelWrap>
           <textarea
             name='content' id='content'
-            cols='30' rows='3'
+            cols='30' rows='10'
             value={Content}
             onChange={e=>setContent(e.target.value)}
           ></textarea>
@@ -65,7 +94,7 @@ function Create() {
             onClick={handleCreate}
           >SEND</button>
         </li>
-      </ul>
+      </FormWrap>
     </Layout>
   )
 }

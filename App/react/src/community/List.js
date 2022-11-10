@@ -34,7 +34,7 @@ const Item = styled.article`
   }
 `;
 
-const BtnSet = styled.div`
+const PageTitle = styled.div`
   padding-left: 10px;
   margin-bottom: 20px;
   display: flex;
@@ -68,7 +68,7 @@ function List() {
 
   return (
     <Layout name='List'>
-      <BtnSet>
+      <PageTitle>
         <h2>
           Article List
         </h2>
@@ -78,7 +78,7 @@ function List() {
           : <>작성일 <FontAwesomeIcon icon={faCaretUp}></FontAwesomeIcon></>
           }
         </button>
-      </BtnSet>
+      </PageTitle>
       {List.map(post=>{
         return (
           <Item key={post._id}>

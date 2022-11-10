@@ -5,13 +5,31 @@ import styled from 'styled-components';
 import axios from 'axios';
 import Layout from '../common/Layout';
 
-const BtnSet = styled.div`
-  margin-top: 20px;
-
+const FormWrap = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   button{
-    margin-right: 20px;
+    margin-right: 10px;
   }
-`
+`;
+
+const LabelWrap = styled.label`
+  padding-left: 10px;
+  margin-bottom: 10px;
+  display: block;
+  font-size: 24px;
+  font-weight: 300;
+`;
+
+const PageTitle = styled.div`
+  padding-left: 10px;
+  margin-bottom: 20px;
+  h2{
+    font-weight: 100;
+    font-size: 50px;
+  }
+`;
 
 function Edit() {
 
@@ -78,27 +96,32 @@ function Edit() {
     <>
       {Loaded ?
         <Layout name='Edit'>
-          <ul>
+          <PageTitle>
+            <h2>
+              Edit an Article
+            </h2>
+          </PageTitle>
+          <FormWrap>
             <li>
-              <label htmlFor='title'>Title</label>
+              <LabelWrap htmlFor='title'>Title</LabelWrap>
               <input type='text' id='title' 
                 defaultValue={Title}
                 onChange={(e)=>setTitle(e.target.value)}
               />
             </li>
             <li>
-              <label htmlFor='content'>Content</label>
+              <LabelWrap htmlFor='content'>Content</LabelWrap>
               <textarea type='text' id='content' 
                 cols='30' rows='4'
                 defaultValue={Content}
                 onChange={(e)=>setContent(e.target.value)}
               />
             </li>
-          </ul>
-          <BtnSet>
-            <button onClick={()=>navigate(-1)}>Cancel</button>
-            <button onClick={handleUpdate}>Update</button>
-          </BtnSet>
+            <li>
+              <button className='grayBtn' onClick={()=>navigate(-1)}>Cancel</button>
+              <button onClick={handleUpdate}>Update</button>
+            </li>
+          </FormWrap>
         </Layout>
       : <p>Loading...</p>
       }
