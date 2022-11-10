@@ -36,7 +36,7 @@ function App() {
 			<GlobalStyle />
 
       <ThemeProvider>
-				<Header />
+				<Header/>
 
 				<Routes>
 						<Route path='/' element={<Main />} />

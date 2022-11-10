@@ -10,7 +10,7 @@ const Item = styled.article`
   width: 100%;
   padding: 20px 30px;
   margin-bottom: 20px;
-  background-color: var(--color-white);
+  background-color: ${props=>props.theme.bgColor};
   border-radius: 10px;
   transition: 0.5s;
   &:hover{
@@ -41,7 +41,6 @@ const PageTitle = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   h2{
-    //font-family: 'WindSong', cursive;
     font-weight: 100;
     font-size: 50px;
   }

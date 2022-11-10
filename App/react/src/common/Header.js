@@ -5,6 +5,10 @@ import firebase from '../firebase';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faList, faPenNib, faUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components';
+import { useTheme } from '../theme/themeProvider';
+import ThemeToggle from './ThemeToggle';
+import Popup from './Popup';
+import { useState } from 'react';
 
 const HeaderWrap = styled.header`
   width: 60px;
@@ -15,17 +19,17 @@ const HeaderWrap = styled.header`
   top: 0;
   left: 0;
   z-index: 10;
-  background-color: var(--color-dark-gray);
+  background-color: ${props=>props.theme.bgColor};
 `;
 
 const Logo = styled.h1`
   margin-bottom: 10px;
   font-size: 24px;
   text-align: center;
-  color: var(--color-white);
+  color: ${props=>props.theme.normalColor};
   transition: 0.3s;
   &:hover{
-    color: var(--color-theme);
+    color: ${props=>props.theme.pointColor};
   }
 `;
 
@@ -47,7 +51,7 @@ const Gnb = styled.div`
             width: 100%;
             padding: 15px 10px;
             font-size: 18px;
-            color: var(--color-white);
+            color: ${props=>props.theme.normalColor};
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -80,23 +84,23 @@ const Gnb = styled.div`
         }
         &.active{
           margin-left: 10px;
-          background-color: var(--color-white-gray);
+          background-color: ${props=>props.theme.brightColor};
           .wrap{
-            background-color: var(--color-dark-gray);
+            background-color: ${props=>props.theme.bgColor};
             .icon{
-              background-color: var(--color-white-gray);
+              background-color: ${props=>props.theme.brightColor};
               border-radius: 10px 0 0 10px;
-              color: var(--color-theme);
+              color: ${props=>props.theme.pointColor};
             }
           }
           .header{
             height: 10px;
-            background-color: var(--color-dark-gray);
+            background-color: ${props=>props.theme.bgColor};
             border-radius: 0 0 10px 0;
           }
           .footer{
             height: 10px;
-            background-color: var(--color-dark-gray);
+            background-color: ${props=>props.theme.bgColor};
             border-radius: 0 10px 0 0;
           }
         }
@@ -120,7 +124,7 @@ const Util = styled.div`
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: var(--color-white);
+        color: ${props=>props.theme.normalColor};
 
         span{
           display: block;
@@ -146,10 +150,10 @@ const Circle = styled.div`
   width: 30px;
   height: 30px;
   overflow: hidden;
-  border: 1px solid var(--color-white);
+  border: 1px solid ${props=>props.theme.normalColor};
   border-radius: 50%;
   text-align: center;
-  color: var(--color-white);
+  color: ${props=>props.theme.normalColor};
 `;
 
 function Header() {
@@ -158,6 +162,8 @@ function Header() {
   const dispatch = useDispatch();
   const activeStyle = { color: 'hotpink'};
   const User = useSelector(store=> store.user);
+  const [ OnPopup, setOnPopup ] = useState(document.cookie.indexOf('theme') === -1 ? true : false);
+  const [ Theme, setTheme ] = useTheme(); 
 
   const handleLogout = (e)=>{
     e.preventDefault();
@@ -168,8 +174,11 @@ function Header() {
   }
   
   return (
+    <>
+    {OnPopup &&
+      <Popup setTheme={setTheme} Theme={Theme} setOnPopup={setOnPopup}></Popup>
+    }
     <HeaderWrap>
-
       <Gnb id='gnb'>
         <Logo>
           <NavLink to='/'>
@@ -224,6 +233,7 @@ function Header() {
           }
         </ul>
         <Util>
+          <ThemeToggle setTheme={setTheme} Theme={Theme}></ThemeToggle>
           {User.accessToken &&
             <ul>
               <li>
@@ -244,7 +254,8 @@ function Header() {
         </Util>
       </Gnb>
     </HeaderWrap>
+  </>
   )
 }
 
-export default Header
+export default Header;

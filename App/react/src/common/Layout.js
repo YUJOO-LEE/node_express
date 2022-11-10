@@ -7,24 +7,26 @@ const MainWrap = styled.main`
   padding: 50px 50px 50px 100px;
   overflow: hidden;
   position: relative;
+  background-color: ${props=>props.theme.brightColor};
+  color: ${props=>props.theme.normalColor};
 
   button{
     padding: 10px 15px;
-    background-color: var(--color-theme);
+    background-color: ${props=>props.theme.pointColor};
     border: 0;
     outline: 0;
     border-radius: 10px;
     font-family: inherit;
     font-weight: 500;
-    color: var(--color-black);
+    color: ${props=>props.theme.normalColor};
     cursor: pointer;
     transition: 0.3s;
     &:hover{
       box-shadow: 0 5px 10px rgba(0,0,0,0.1);
     }
     &.grayBtn{
-    background-color: var(--color-dark-gray);
-    color: var(--color-white);
+    background-color: ${props=>props.theme.darkColor};
+    color: ${props=>props.theme.brightColor};
     font-weight: 300;
     }
   }
@@ -34,6 +36,8 @@ const MainWrap = styled.main`
     padding: 10px;
     border: 0;
     outline: 0;
+    background-color: ${props=>props.theme.bgColor};
+    color: inherit;
     border-radius: 10px;
     font-family: inherit;
     font-size: 18px;
@@ -44,7 +48,7 @@ const MainWrap = styled.main`
   .errMsg{
     font-size: 14px;
     font-weight: 300;
-    color: var(--color-theme)
+    color: ${props=>props.theme.pointColor};
   }
 `;
 

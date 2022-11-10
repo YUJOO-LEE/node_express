@@ -11,7 +11,7 @@ const Inner = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  background-color: var(--color-dark-gray);
+  background-color: ${props=>props.theme.bgColor};
 `;
 
 const WelcomeMsg = styled.h2`
@@ -24,7 +24,7 @@ const WelcomeMsg = styled.h2`
     font-family: 'Montserrat', sans-serif;
     font-size: 4vw;
     font-weight: 800;
-    color: #181818;
+    color: ${props=>props.theme.brightColor};
     position: absolute;
     top: 30%;
     left: 50%;
@@ -35,7 +35,7 @@ const WelcomeMsg = styled.h2`
     font-family: 'Montserrat', sans-serif;
     font-size: 20vw;
     font-weight: 800;
-    color: #181818;
+    color: ${props=>props.theme.brightColor};
     position: absolute;
     top: 70%;
     left: 50%;
@@ -46,7 +46,7 @@ const WelcomeMsg = styled.h2`
     font-family: 'WindSong', cursive;
     font-size: 5vw;
     font-weight: 100;
-    color: var(--color-white);
+    color: ${props=>props.theme.normalColor};
     position: absolute;
     top: 70%;
     left: 50%;
@@ -66,7 +66,7 @@ const MainList = styled.section`
   article{
     width: 31%;
     height: 150px;
-    background: rgba(255,255,255,0.2);
+    background-color: ${props=>props.theme.brightColor};
     padding: 20px;
     display: flex;
     align-content: space-between;
@@ -75,13 +75,13 @@ const MainList = styled.section`
     h2{
       font-weight: 100;
       font-size: 18px;
-      color: var(--color-white);
+      color: ${props=>props.theme.normalColor};
       width: 100%;
     }
     p{
       font-size: 11px;
       font-weight: 100;
-      color: var(--color-white);
+      color: ${props=>props.theme.normalColor};
     }
   }
 `;

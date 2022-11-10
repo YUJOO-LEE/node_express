@@ -38,7 +38,7 @@ const ArticleHeader = styled.div`
 const Content = styled.div`
   width: 100%;
   padding: 40px;
-  background: var(--color-white);
+  background-color: ${props=>props.theme.bgColor};
   border-radius: 10px;
   font-weight: 100;
 `;
