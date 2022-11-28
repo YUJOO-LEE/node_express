@@ -101,7 +101,7 @@ function Detail() {
       .finally(()=>{
         setLoaded(true);
       })
-  }, []);
+  }, [item.num]);
 
   return (
     <>

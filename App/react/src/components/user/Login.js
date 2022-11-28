@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import firebase from '../firebase';
+import firebase from '../../firebase';
 import styled from 'styled-components';
 import Layout from '../common/Layout';
 
