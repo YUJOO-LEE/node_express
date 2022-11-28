@@ -67,7 +67,7 @@ function Create() {
       alert('로그인 후 작성이 가능합니다.');
       navigate('/login');
     }
-  }, [])
+  }, [User, navigate])
 
   return (
     <Layout name='Create'>
