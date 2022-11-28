@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
-import GlobalStyle from './GlobalStyle';
+import GlobalStyle from './theme/GlobalStyle';
 import Header from './common/Header';
 import Main from './common/Main';
 import List from './community/List';
@@ -29,7 +29,7 @@ function App() {
 				dispatch(loginUser(userInfo.multiFactor.user));
 			}
 		});
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<>
@@ -38,14 +38,14 @@ function App() {
 				<Header/>
 
 				<Routes>
-						<Route path='/' element={<Main />} />
-						<Route path='/list' element={<List />} />
-						<Route path='/write' element={<Create />} />
-						<Route path='/detail/:num' element={<Detail />} />
-						<Route path='/edit/:num' element={<Edit />} />
-						<Route path='/join' element={<Join />} />
-						<Route path='/login' element={<Login />} />
-					</Routes>
+					<Route path='/' element={<Main />} />
+					<Route path='/list' element={<List />} />
+					<Route path='/write' element={<Create />} />
+					<Route path='/detail/:num' element={<Detail />} />
+					<Route path='/edit/:num' element={<Edit />} />
+					<Route path='/join' element={<Join />} />
+					<Route path='/login' element={<Login />} />
+				</Routes>
       </ThemeProvider>
 		</>
 	);

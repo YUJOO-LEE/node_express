@@ -53,7 +53,7 @@ const useTheme = () => {
       setThemeMode('light');
       setCookie('light');
     };
-  }, [ThemeMode]);
+  }, [ThemeMode, setThemeMode]);
   
   return [ ThemeMode, toggleTheme];
 }
